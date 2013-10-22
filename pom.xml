@@ -47,7 +47,23 @@
             <name>JA-SIG Maven2 Repository</name>
             <url>http://developer.jasig.org/repo/content/repositories/m2</url>
         </repository>
+
+        <!-- jlehtinen.net repository -->
+        <repository>
+            <id>jlehtinen.net</id>
+            <url>http://repo.jlehtinen.net/maven2/</url>
+        </repository>
     </repositories>
+
+     <!-- Repositories for plugins -->
+    <pluginRepositories>
+        <pluginRepository>
+            <id>jlehtinen.net</id>
+            <url>http://repo.jlehtinen.net/maven2/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+
 
     <dependencyManagement>
         <dependencies>
@@ -549,6 +565,18 @@
             </plugins>
         </pluginManagement>
         <plugins>
+
+            <plugin>
+            <groupId>net.jlehtinen.portlet</groupId>
+            <artifactId>portlet-prototyping-maven-plugin</artifactId>
+            <version>0.9</version>
+            <configuration>
+                <portletNames>email-preview</portletNames>
+                <webAppConfig>
+                    <overrideDescriptor>src/test/resources/override-web.xml</overrideDescriptor>
+                </webAppConfig>
+            </configuration>
+        </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
