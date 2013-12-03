@@ -31,3 +31,48 @@
 <%@ taglib prefix="rs" uri="http://www.jasig.org/resource-server" %>
 
 <portlet:defineObjects/>
+
+
+<script type="text/javascript" src="/../email-preview/rs/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+<link type="text/css" href="/../email-preview/rs/bootstrap/3.0.2/css/bootstrap-modified.css" rel="stylesheet" />
+<script type="text/javascript" src="/../email-preview/rs/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+<link type="text/css" href="/../email-preview/rs/bootstrap/3.0.2/css/bootstrap-theme.min.css" rel="stylesheet" />
+
+<%-- Portlet container --%>
+<div class="portlet-container sm">
+ 
+ 
+<script type="text/javascript">
+ 
+    var $portletContainers;
+ 
+$(document).ready(function() {
+    $portletContainers = $(".portlet-container");
+    // Resize event isn't fired on DOM Content Loaded, we launch the function manually
+    onWindowResize();
+  $(window).resize(onWindowResize);
+});
+ 
+function onWindowResize() {
+    $portletContainers.each(function(index) {
+        
+        var $that = $(this);
+        var portletWidth = $that.width()
+        
+        $that.removeClass("xs sm md lg");
+        
+        if(portletWidth < 768)
+            $that.addClass("xs");
+        if(portletWidth >= 768 && portletWidth < 992)
+            $that.addClass("sm");
+        if(portletWidth >= 992 && portletWidth < 1200)
+            $that.addClass("md");
+        if(portletWidth >= 1200)
+            $that.addClass("lg");
+    
+    });
+}
+ 
+</script>
+ 
+<!-- Your code here -->

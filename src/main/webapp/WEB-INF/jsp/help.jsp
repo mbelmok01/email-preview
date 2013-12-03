@@ -19,7 +19,6 @@
 
 --%>
 <jsp:directive.include file="/WEB-INF/jsp/include.jsp"/>
-
 <c:set var="n"><portlet:namespace/></c:set>
 
 <div class="fl-widget portlet" role="section">
