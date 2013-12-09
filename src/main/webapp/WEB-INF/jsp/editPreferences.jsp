@@ -28,119 +28,209 @@
 <script src="<rs:resourceURL value='/rs/fluid/1.1.3/js/fluid-all-1.1.3.min.js'/>" type="text/javascript"></script>
 <link type="text/css" rel="stylesheet" href="<c:url value="/css/email.min.css"/>"/>
 
+<style>
+    .portlet-container .btn {
+        margin-right: 12px;
+        width: 90px;
+        float: right;
+    }
+</style>
 <c:set var="n"><portlet:namespace/></c:set>
 
-<form id="plt-email-form" action="<portlet:actionURL><portlet:param name="action" value="updatePreferences"/></portlet:actionURL>" method="POST">
+<form class="form-horizontal" id="plt-email-form" action="<portlet:actionURL><portlet:param name="action" value="updatePreferences"/></portlet:actionURL>" method="POST">
+	<fieldset>
 
-    <h2><spring:message code="editPreferences.emailSettings.title"/></h2>
+	<legend>
+		<spring:message code="editPreferences.emailSettings.title"/>
+	</legend>
 
+    	
     <!-- Error message will always be displayed if rendered in the markup -->
     <c:if test="${errorMessage ne null}">
-        <div id="plt-email-submission-error"><p><c:out value="${errorMessage}"/></p></div>
+       	<div id="plt-email-submission-error">
+       		<p>
+       			<c:out value="${errorMessage}"/>
+       		</p>
+       	</div>
     </c:if>
 
-    <div class="fieldset plt-email-fieldset-settings">
-
+    <div class="plt-email-fieldset-settings">
         <!-- Don't show server configuration if the protocol is set to an admin-only protocol like Exchange Web Services -->
+
+
+        <div class="container">
+
+            <c:choose>
+                <c:when test="${adminOnlyProtocol}">
+                    <div class="hidden">
+                        <input type="text" name="protocol" value="${form.protocol}"/>
+                </c:when>
+                
+                <c:otherwise>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-5 col-sm-8 col-xs-12" >
+                            <spring:message code="editPreferences.emailSettings.serverProtocol"/>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
+                            <select name="protocol" id="plt-email-input-protocol" class="form-control">
+                            title="<spring:message code="editPreferences.emailSettings.serverProtocol.tooltip"/>">
+                                <c:forEach items="${protocols}" var="protocol">
+                                    <option
+                                    <c:if test="${form.protocol eq protocol}">selected="selected"</c:if>value="<c:out value="${protocol}"/>"><c:out value="${protocol}"/>
+                                    </option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+
+            <br>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-5 col-sm-8 col-xs-12" >
+                    <spring:message code="editPreferences.emailSettings.serverName"/>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
+                    <input type="text" name="host" class="form-control" id="plt-email-input-server" title="<spring:message code="editPreferences.emailSettings.serverName.tooltip"/>" value="<c:out value="${form.host}"/>"/>  
+                </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-5 col-sm-8 col-xs-12" >
+            		<spring:message code="editPreferences.emailSettings.serverPort"/>
+            	</div>
+        	   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
+        		  <input type="text" name="port" class="form-control" id="plt-email-input-port" title="<spring:message code="editPreferences.emailSettings.serverPort.toolTip"/>" value="<c:out value="${form.port}"/>"/>
+        	   </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-5 col-sm-8 col-xs-12" >
+                    <spring:message code="editPreferences.emailSettings.inboxFolder"/>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
+                    <input type="text" name="inboxName" class="form-control" id="plt-email-input-inbox-folder-name" title="<spring:message code="editPreferences.emailSettings.inboxFolderName.tooltip"/>" value="<c:out value="${form.inboxFolderName}"/>"/>
+        	   </div>
+            </div>
+        </div>
+
+        <br>
+        
+        <c:if test="${adminOnlyProtocol}">
+        
+    </div>
+</c:if>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-md-5 col-sm-8 col-xs-12" >
+            <spring:message code="editPreferences.preferences.markMessagesAsRead"/>
+        <!-- </div> -->
         <c:choose>
-            <c:when test="${adminOnlyProtocol}">
-                <div class="hidden">
-                    <input type="text" name="protocol" value="${form.protocol}"/>
+            <c:when test="${form.protocol eq 'pop3' || form.protocol eq 'pop3s'}">
+               <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" > -->
+                <input type="checkbox" name="markMessagesAsRead" id="plt-email-input-markMessagesAsRead" title="<spring:message code="editPreferences.preferences.markMessagesAsRead.tooltip"/>" disabled/>
+                </div>
             </c:when>
             <c:otherwise>
-                <div class="plt-email-row">
-                    <label><spring:message code="editPreferences.emailSettings.serverProtocol"/></label>
-                    <select name="protocol" id="plt-email-input-protocol" title="<spring:message code="editPreferences.emailSettings.serverProtocol.tooltip"/>">
-                    <c:forEach items="${protocols}" var="protocol">
-                        <option<c:if test="${form.protocol eq protocol}"> selected="selected"</c:if> value="<c:out value="${protocol}"/>"><c:out value="${protocol}"/></option>
-                    </c:forEach>
-                    </select>
+            <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" > -->
+                <input type="checkbox" name="markMessagesAsRead" id="plt-email-input-markMessagesAsRead" title="<spring:message code="editPreferences.preferences.markMessagesAsRead.tooltip"/>" <c:if test="${form.markMessagesAsRead}">checked="checked"</c:if>/>
                 </div>
             </c:otherwise>
         </c:choose>
-            <div class="plt-email-row">
-                <label><spring:message code="editPreferences.emailSettings.serverName"/></label>
-                <input type="text" name="host" id="plt-email-input-server" title="<spring:message code="editPreferences.emailSettings.serverName.tooltip"/>" value="<c:out value="${form.host}"/>"/>
-            </div>
-            <div class="plt-email-row">
-                <label><spring:message code="editPreferences.emailSettings.serverPort"/></label>
-                <input type="text" name="port" id="plt-email-input-port" title="<spring:message code="editPreferences.emailSettings.serverPort.toolTip"/>" value="<c:out value="${form.port}"/>"/>
-            </div>
-            <div class="plt-email-row">
-                <label><spring:message code="editPreferences.emailSettings.inboxFolderName"/></label>
-                <input type="text" name="inboxName" id="plt-email-input-inbox-folder-name" title="<spring:message code="editPreferences.emailSettings.inboxFolderName.tooltip"/>" value="<c:out value="${form.inboxFolderName}"/>"/>
-            </div>
-        <c:if test="${adminOnlyProtocol}">
-            </div>
-        </c:if>
-        <div class="plt-email-row">
-            <label><spring:message code="editPreferences.preferences.markMessagesAsRead"/></label>
-            <c:choose>
-                <c:when test="${form.protocol eq 'pop3' || form.protocol eq 'pop3s'}">
-                    <input type="checkbox" name="markMessagesAsRead" id="plt-email-input-markMessagesAsRead" title="<spring:message code="editPreferences.preferences.markMessagesAsRead.tooltip"/>" disabled/>
-                </c:when>
-                <c:otherwise>
-                    <input type="checkbox" name="markMessagesAsRead" id="plt-email-input-markMessagesAsRead" title="<spring:message code="editPreferences.preferences.markMessagesAsRead.tooltip"/>" <c:if test="${form.markMessagesAsRead}">checked="checked"</c:if>/>
-                </c:otherwise>
-            </c:choose>
-        </div>
-    </div>          
+    </div>
 
-    <!-- Show radio buttons if multiple authenticationServices are in use -->
-    <c:if test="${fn:length(authenticationServices) > 1}">
-        <div class="fieldset plt-email-fieldset-verify">
-            <c:if test="${authenticationServices.cachedPassword ne null}">
-                <label>
-                    <input id="authtype_cache" type="radio" name="authenticationServiceKey" value="cachedPassword"<c:if test="${form.authenticationServiceKey eq 'cachedPassword'}"> checked="checked"</c:if>> <spring:message code="editPreferences.emailSettings.cachedPasswordAuthN.description"/> 
-                </label>
-            </c:if>
-            <c:if test="${authenticationServices.portletPreferences ne null}">
-                <label>
-                    <input id="authtype_preferences" type="radio" name="authenticationServiceKey" value="portletPreferences"<c:if test="${form.authenticationServiceKey eq 'portletPreferences'}"> checked="checked"</c:if>> <spring:message code="editPreferences.emailSettings.portletPreferencesAuthN.description"/>
-                </label>
-            </c:if>
-        </div>
-    </c:if>
+    <br>
 
     <c:if test="${authenticationServices.portletPreferences ne null}">
         <!-- Show these fields if the authService is currently 'portletPreferences' -->
         <c:set var="displayStyle" value="${form.authenticationServiceKey eq 'portletPreferences' ? '' : 'display: none;'}" />
-        <div class="fieldset plt-email-fieldset-authparams plt-email-fieldset-ppauth" style="${displayStyle}">
-            <div class="plt-email-row">
-                <label><spring:message code="editPreferences.emailSettings.portletPreferencesAuthN.emailAddress"/></label>
-                <c:set var="accountNameAttribute" value="${form.additionalProperties['PortletPreferencesCredentialsAuthenticationService.ACCOUNT_NAME_ATTRIBUTE'].value}" />
-                <c:set var="useAccountNameAttribute" value="${not empty accountNameAttribute}" />
-                <c:set var="accountNameValue" value="${useAccountNameAttribute ? userInfo[accountNameAttribute] : form.additionalProperties.username.value}" />
-                <input type="text" name="username" id="plt-email-input-email" title="<spring:message code="editPreferences.emailSettings.portletPreferencesAuthN.emailAddress.tooltip"/>" value="<c:out value="${accountNameValue}"/>"<c:if test="${useAccountNameAttribute}">disabled="disabled"</c:if> />
+
+        <div class="row plt-email-fieldset-authparams plt-email-fieldset-ppauth" style="${displayStyle}">
+            <div class="col-lg-4 col-md-5 col-sm-8 col-xs-12" >
+                <spring:message code="editPreferences.emailSettings.portletPreferencesAuthN.emailAddress"/>
+            </div>
+
+            <c:set var="accountNameAttribute" value="${form.additionalProperties['PortletPreferencesCredentialsAuthenticationService.ACCOUNT_NAME_ATTRIBUTE'].value}" />
+            <c:set var="useAccountNameAttribute" value="${not empty accountNameAttribute}" />
+            <c:set var="accountNameValue" value="${useAccountNameAttribute ? userInfo[accountNameAttribute] : form.additionalProperties.username.value}" />
+
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
+                <input type="text" name="username" class="form-control" id="plt-email-input-email" title="<spring:message code="editPreferences.emailSettings.portletPreferencesAuthN.emailAddress.tooltip"/>" value="<c:out value="${accountNameValue}"/>"<c:if test="${useAccountNameAttribute}">disabled="disabled"</c:if> />
                 <span class="plt-email-address-suffix"><c:out value="${form.usernameSuffix}"/></span>
             </div>
-            <div class="plt-email-row">
-                <label><spring:message code="editPreferences.emailSettings.portletPreferencesAuthN.password"/></label>
-                <input type="password" name="ppauth_password" id="plt-email-input-password" title="<spring:message code="editPreferences.emailSettings.portletPreferencesAuthN.password.tooltip"/>" value="<c:out value="${unchangedPassword}"/>"/>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-5 col-sm-8 col-xs-12" >
+                <spring:message code="editPreferences.emailSettings.portletPreferencesAuthN.password"/>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
+                <input type="password" name="ppauth_password" class="form-control" id="plt-email-input-password" title="<spring:message code="editPreferences.emailSettings.portletPreferencesAuthN.password.tooltip"/>" value="<c:out value="${unchangedPassword}"/>"/>
             </div>
         </div>
     </c:if>
-            
-    <h2><spring:message code="editPreferences.preferences.title"/></h2>
+</div>
 
-    <div class="fieldset plt-email-fieldset-settings">
-        <div class="plt-email-row">
-            <label><spring:message code="editPreferences.preferences.show"/></label>
-            <select name="defaultView" title="<spring:message code="editPreferences.preferences.show.tooltip"/>">
-                <option<c:if test="${renderRequest.preferences.map['defaultView'][0] eq 'rollup'}"> selected="selected"</c:if> value="rollup"><spring:message code="editPreferences.preferences.show.rollup"/></option>
-                <option<c:if test="${renderRequest.preferences.map['defaultView'][0] eq 'preview'}"> selected="selected"</c:if> value="preview"><spring:message code="editPreferences.preferences.show.preview"/></option>
-            </select>
-            <label><spring:message code="editPreferences.preferences.onLogin"/></label>
+<br>
+
+<legend>
+    <spring:message code="editPreferences.preferences.title"/>
+</legend>
+
+<div class="container">
+    <div class="plt-email-fieldset-settings">
+        <div class="row">
+            <div class="col-lg-4 col-md-5 col-sm-8 col-xs-12" >
+            	<spring:message code="editPreferences.preferences.show"/>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <select name="defaultView" class="form-control"> title="<spring:message code="editPreferences.preferences.show.tooltip"/>">
+                    <option<c:if test="${renderRequest.preferences.map['defaultView'][0] eq 'rollup'}"> selected="selected"</c:if> value="rollup">
+                	   <spring:message code="editPreferences.preferences.show.rollup"/>
+                    </option>
+                    <option<c:if test="${renderRequest.preferences.map['defaultView'][0] eq 'preview'}"> selected="selected"</c:if> value="preview">
+                	   <spring:message code="editPreferences.preferences.show.preview"/>
+                    </option>
+                </select>
+            </div>
         </div>
-        <div class="plt-email-row">
-            <label><spring:message code="editPreferences.preferences.focusOnPreview"/></label>
-            <input type="checkbox" name="focusOnPreview" title="<spring:message code="editPreferences.preferences.focusOnPreview.tooltip"/>" value="true"<c:if test="${renderRequest.preferences.map['focusOnPreview'][0] eq 'true'}"> checked="checked"</c:if>/>
+
+        <br>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-5 col-sm-8 col-xs-12" >
+                <spring:message code="editPreferences.preferences.focusOnPreview"/>
+            <!-- </div> -->
+            <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"> -->
+                <input type="checkbox" name="focusOnPreview" title="<spring:message code="editPreferences.preferences.focusOnPreview.tooltip"/>" value="true"<c:if test="${renderRequest.preferences.map['focusOnPreview'][0] eq 'true'}"> checked="checked"</c:if>/>
+                </div>
+            </div>
         </div>
-    </div>          
+    </div>
+</div>
 
-    <input type="submit" name="submit_email" value=" <spring:message code="editPreferences.buttonGroup.saveSettings"/> " id="plt-email-input-submit"/>
-    <a id="plt-email-input-cancel" href="<portlet:renderURL portletMode="view"/>"><spring:message code="editPreferences.buttonGroup.cancel"/></a>
+<br>
 
+<div class="control-group">
+    <input type="submit" name="submit_email" class="btn btn-primary" value="<spring:message code="editPreferences.buttonGroup.saveSettings"/> " id="plt-email-input-submit"/>
+
+
+    <input class="btn btn-primary" value="<spring:message code="editPreferences.buttonGroup.cancel"/>"
+    onclick="self.location.href='<portlet:renderURL portletMode="view"/>'"
+    />
+
+	</div>
+</div>
 </form>
 
 <script type="text/javascript">
@@ -351,3 +441,4 @@
     });
 
 </script>
+<jsp:directive.include file="/WEB-INF/jsp/footer.jsp"/>

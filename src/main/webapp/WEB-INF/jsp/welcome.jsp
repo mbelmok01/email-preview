@@ -25,7 +25,7 @@
 <div class="fl-widget portlet" role="section">
 
     <div class="fl-widget-titlebar portlet-title" role="sectionhead">
-        <h2 role="heading"><c:out value="${welcomeTitle}"/></h2>
+        <h1 role="heading"><c:out value="${welcomeTitle}"/></h1>
     </div>
 
     <p>

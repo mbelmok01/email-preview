@@ -1,0 +1,2 @@
+<%-- Fin portlet container --%>
+</div>

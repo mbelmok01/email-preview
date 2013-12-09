@@ -19,8 +19,8 @@
 
 --%>
 <jsp:directive.include file="/WEB-INF/jsp/include.jsp"/>
-<c:set var="n"><portlet:namespace/></c:set>
 
+<c:set var="n"><portlet:namespace/></c:set>
 <div class="fl-widget portlet" role="section">
 
 	<div class="fl-widget-titlebar portlet-title" role="sectionhead">
@@ -31,3 +31,5 @@
     
     <p><spring:message code="help.preview.prelink"/> <a href="<portlet:renderURL portletMode="VIEW"/>"><spring:message code="help.preview.link"/></a></p>
 </div>
+
+<jsp:directive.include file="/WEB-INF/jsp/footer.jsp"/>

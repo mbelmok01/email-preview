@@ -21,7 +21,15 @@
 <jsp:directive.include file="/WEB-INF/jsp/include.jsp"/>
 
 <div class="portlet-font">
-    <p><a href="<portlet:renderURL><portlet:param name="action" value="preview"/></portlet:renderURL>"><spring:message code="error.message.refresh"/></a></p>
-    <p class="portlet-msg-error"><spring:message code="error.message.first"/><br />
-        <spring:message code="error.message.second"/></p>
+    <p>
+        <a href="<portlet:renderURL><portlet:param name="action" value="preview"/></portlet:renderURL>"><spring:message code="error.message.refresh"/>
+        </a>
+    </p>
+    <p class="portlet-msg-error">
+        <spring:message code="error.message.first"/>
+
+        <br/>
+
+        <spring:message code="error.message.second"/>
+    </p>
 </div>
