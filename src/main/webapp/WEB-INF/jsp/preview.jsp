@@ -28,7 +28,7 @@
 <script src="<rs:resourceURL value="/rs/fluid/1.1.3/js/fluid-all-1.1.3.js"/>" type="text/javascript"></script>
 <script src="<c:url value="/js/batched-pager.js"/>" type="text/javascript"></script>
 <script src="<c:url value="/js/email-browser.js"/>" type="text/javascript"></script>
-<link type="text/css" rel="stylesheet" href="<c:url value="/css/email.min.css"/>"/>
+<link type="text/css" rel="stylesheet" href="<c:url value="/css/email.css"/>"/>
 
 <c:set var="n"><portlet:namespace/></c:set>
 <portlet:resourceURL id="accountSummary" var="accountSummaryUrl" />
@@ -48,7 +48,9 @@
 
 <div id="${n}container" class="email-container portlet" xmlns:rsf="http://ponder.org.uk">
 
-    <div class="loading-message"></div>
+    <div class="loading-message">
+        
+    </div>
 
     <div class="error-message portlet-msg-error portlet-msg error" role="alert" style="display:none">
         <p id="error-text"></p>
@@ -65,15 +67,34 @@
                 <c:if test="${not empty inboxUrl}">
                     <a class="inbox-link email-action-link" href="" target="_blank">
                 </c:if>
-                <img alt="Refresh" src="<rs:resourceURL value="/rs/famfamfam/silk/1.3/email.png"/>"/>&nbsp;<spring:message code="preview.toolbar.inbox"/>
-                <c:if test="${not empty inboxUrl}">
+                <img alt="Refresh" src="<rs:resourceURL value="/rs/famfamfam/silk/1.3/email.png"/>"/>
+                    &nbsp;
+                    <spring:message code="preview.toolbar.inbox"/>
+                    <c:if test="${not empty inboxUrl}">
                     </a>
                 </c:if>
-                (<span class="unread-message-count"></span> <spring:message code="preview.toolbar.unreadMessages"/>)
-                | <a class="refresh-link email-action-link" href="javascript:;"><img alt="Refresh" src="<rs:resourceURL value="/rs/famfamfam/silk/1.3/arrow_refresh_small.png"/>"/>&nbsp;<spring:message code="preview.toolbar.refresh"/></a>
-                <c:if test="${allowDelete}">
-                | <a class="delete-link email-action-link" href="javascript:;"><img alt="Delete Selected" src="<rs:resourceURL value="/rs/famfamfam/silk/1.3/delete.png"/>"/>&nbsp;<span><spring:message code="preview.toolbar.deleteSelected"/></span></a>
-                </c:if>
+                
+                (
+                    <span class="unread-message-count"></span>
+                    <spring:message code="preview.toolbar.unreadMessages"/>
+                )
+
+                |
+                    <a class="refresh-link email-action-link" href="javascript:;">
+                        <img alt="Refresh" src="<rs:resourceURL value="/rs/famfamfam/silk/1.3/arrow_refresh_small.png"/>"/>&nbsp;
+                        <spring:message code="preview.toolbar.refresh"/>
+                    </a>
+
+                    <c:if test="${allowDelete}">
+                    |   <a class="delete-link email-action-link" href="javascript:;">
+                            <img alt="Delete Selected" src="<rs:resourceURL value="/rs/famfamfam/silk/1.3/delete.png"/>"/>
+                            &nbsp;
+                            <span>
+                                <spring:message code="preview.toolbar.deleteSelected"/>
+                            </span>
+                        </a>
+                    </c:if>
+
                 | <a class="email-action-link" href="${showRollupUrl}"><img alt="Close" src="<rs:resourceURL value="/rs/famfamfam/silk/1.3/door_out.png"/>"/>&nbsp;<spring:message code="preview.toolbar.closePreview"/></a>
                 <c:if test="${supportsEdit}">
                 | <a class="email-action-link" href="<portlet:renderURL portletMode="EDIT"/>"><img alt="Preferences" src="<rs:resourceURL value="/rs/famfamfam/silk/1.3/cog_edit.png"/>"/>&nbsp;<spring:message code="preview.toolbar.preferences"/></a>

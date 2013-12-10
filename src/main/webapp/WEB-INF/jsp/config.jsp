@@ -57,6 +57,12 @@
         float: right;
         margin: 4px;
     }
+    .portlet-container .btn-xs {
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
     
 </style>
 
@@ -90,11 +96,11 @@
                     <div class="row">
                        	<div class="col-lg-5 col-md-5 col-sm-8 col-xs-12" lign="justified">
                             <form:label path="protocol">
-                                <b>
+                                
                                     <spring:message code="config.preferences.protocol"/>
-                                </b>
+                                
                             </form:label>   
-                             <a href="#" id="protocol" class="btn btn-info btn-xs " data-placement="left" rel="popover" data-content="<spring:message code="config.preferences.protocol.tooltip"/>" data-original-title="<spring:message code="config.preferences.protocol"/>">infos
+                             <a href="#" id="protocol" class="btn btn-info btn-xs " data-placement="left" rel="popover" data-content="<spring:message code="config.preferences.protocol.tooltip"/>" data-original-title="<spring:message code="config.preferences.protocol"/>"><span class="glyphicon glyphicon-info-sign"></span>
                                 </a>
                                 <script type="text/javascript">
                                     $(function (){
@@ -118,9 +124,9 @@
                     <div class="row">
                 	   <div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
                             <form:label path="exchangeDomain">
-                                <b><spring:message code="config.preferences.exchange.domain"/></b>
+                                <spring:message code="config.preferences.exchange.domain"/>
                             </form:label>
-                            <a href="#" id="exchange" class="btn btn-info btn-xs" data-placement="left" rel="popover" data-content="<spring:message code="config.preferences.exchange.domain.tooltip"/>" data-original-title="<spring:message code="config.preferences.exchange.domain"/>">infos
+                            <a href="#" id="exchange" class="btn btn-info btn-xs" data-placement="left" rel="popover" data-content="<spring:message code="config.preferences.exchange.domain.tooltip"/>" data-original-title="<spring:message code="config.preferences.exchange.domain"/>"><span class="glyphicon glyphicon-info-sign"></span>
                                 </a>
                                 <script type="text/javascript">
                                     $(function (){
@@ -131,6 +137,7 @@
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <form:input class="form-control" path="exchangeDomain"/>    
                         </div>
+                        
                     </div>
 
                     <br>
@@ -139,9 +146,9 @@
                     <div class="row">
                         <div class="col-lg-5 col-md-5 col-sm-8 col-xs-12">
                             <form:label path="host">
-                                <b><spring:message code="config.preferences.host"/></b>                                
+                                <spring:message code="config.preferences.host"/>                                
                             </form:label>
-                            <a href="#" id="host" class="btn btn-info btn-xs" data-placement="left" rel="popover" data-content="<spring:message code="config.preferences.host.tooltip"/>" data-original-title="<spring:message code="config.preferences.host"/>">infos
+                            <a href="#" id="host" class="btn btn-info btn-xs" data-placement="left" rel="popover" data-content="<spring:message code="config.preferences.host.tooltip"/>" data-original-title="<spring:message code="config.preferences.host"/>"><span class="glyphicon glyphicon-info-sign"></span>
                                 </a>
                                 <script type="text/javascript">
                                     $(function (){
@@ -150,7 +157,7 @@
                                 </script>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <form:input path="host" class="form-control" placeholder="www.outlook.fr"/>
+                            <form:input path="host" class="form-control" placeholder="imap.gmail.com"/>
                         </div>
                     </div>
 
@@ -160,9 +167,9 @@
                     <div class="row">
                         <div class="col-lg-5 col-md-5 col-sm-8 col-xs-12" >
                             <form:label path="port">
-                                <b><spring:message code="config.preferences.port"/></b>                             
+                                <spring:message code="config.preferences.port"/>                             
                             </form:label>
-                            <a href="#" id="port" class="btn btn-info btn-xs" data-placement="left" rel="popover" data-content="<spring:message code="config.preferences.port.tooltip"/>" data-original-title="<spring:message code="config.preferences.port"/>">infos
+                            <a href="#" id="port" class="btn btn-info btn-xs" data-placement="left" rel="popover" data-content="<spring:message code="config.preferences.port.tooltip"/>" data-original-title="<spring:message code="config.preferences.port"/>"><span class="glyphicon glyphicon-info-sign"></span>
                                 </a>
                                 <script type="text/javascript">
                                     $(function (){
@@ -181,9 +188,9 @@
                     <div class="row">
                         <div class="col-lg-5 col-md-5 col-sm-8 col-xs-12" >
                             <form:label path="usernameSuffix">
-                                <b><spring:message code="config.preferences.username.suffix"/></b>                         
+                                <spring:message code="config.preferences.username.suffix"/>                         
                             </form:label>
-                            <a href="#" id="usernameSuffix" class="btn btn-info btn-xs" data-placement="left" rel="popover" data-content="<spring:message code="config.preferences.username.suffix.tooltip"/>" data-original-title="<spring:message code="config.preferences.username.suffix"/>">infos
+                            <a href="#" id="usernameSuffix" class="btn btn-info btn-xs" data-placement="left" rel="popover" data-content="<spring:message code="config.preferences.username.suffix.tooltip"/>" data-original-title="<spring:message code="config.preferences.username.suffix"/>"><span class="glyphicon glyphicon-info-sign"></span>
                                 </a>
                                 <script type="text/javascript">
                                     $(function (){
@@ -192,7 +199,7 @@
                                 </script>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <form:input path="usernameSuffix" class="form-control"/>
+                            <form:input path="usernameSuffix" placeholder="@gmail.com" class="form-control"/>
                         </div>
                     </div>
 
@@ -202,7 +209,7 @@
                 <!-- <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-8 col-xs-12" >
                         <form:label path="timeout">
-                            <b><spring:message code="config.preferences.timeout"/></b>
+                            <spring:message code="config.preferences.timeout"/>
                             <spring:message code="config.preferences.timeout.tooltip"/>
                         </form:label>
                     </div>
@@ -213,9 +220,9 @@
                 <div class="row">
                     <div class="col-lg-5 col-md-5 col-sm-8 col-xs-12" >
                         <form:label path="timeout">
-                            <b><spring:message code="config.preferences.timeout"/></b>
+                            <spring:message code="config.preferences.timeout"/>
                         </form:label>
-                        <a href="#" id="timeout" class="btn btn-info btn-xs" data-placement="left" rel="popover" data-content="<spring:message code="config.preferences.timeout.tooltip"/>" data-original-title="<spring:message code="config.preferences.timeout"/>">infos
+                        <a href="#" id="timeout" class="btn btn-info btn-xs" data-placement="left" rel="popover" data-content="<spring:message code="config.preferences.timeout.tooltip"/>" data-original-title="<spring:message code="config.preferences.timeout"/>"><span class="glyphicon glyphicon-info-sign"></span>
                                 </a>
                                 <script type="text/javascript">
                                     $(function (){

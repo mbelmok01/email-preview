@@ -34,6 +34,15 @@
         width: 90px;
         float: right;
     }
+    .portlet-container .btn-xs {
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        margin-bottom: 2px;
+        margin-right: inherit;
+        width: initial;
+    }
 </style>
 <c:set var="n"><portlet:namespace/></c:set>
 
@@ -67,9 +76,18 @@
                 </c:when>
                 
                 <c:otherwise>
+
                     <div class="row">
                         <div class="col-lg-4 col-md-5 col-sm-8 col-xs-12" >
+
                             <spring:message code="editPreferences.emailSettings.serverProtocol"/>
+                           <a href="#" id="protocol" class="btn btn-info btn-xs " data-placement="left" rel="popover" data-content="<spring:message code="config.preferences.protocol.tooltip"/>" data-original-title="<spring:message code="config.preferences.protocol"/>"><span class="glyphicon glyphicon-info-sign"></span>
+                                </a>
+                                <script type="text/javascript">
+                                    $(function (){
+                                    $("#protocol").popover();
+                                    });
+                                </script> 
                         </div>
 
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
@@ -88,12 +106,22 @@
 
             <br>
 
+
+
             <div class="row">
                 <div class="col-lg-4 col-md-5 col-sm-8 col-xs-12" >
                     <spring:message code="editPreferences.emailSettings.serverName"/>
+                    <a href="#" id="serverName" class="btn btn-info btn-xs" data-placement="left" rel="popover" data-content="<spring:message code="editPreferences.emailSettings.serverName.tooltip"/>" data-original-title="<spring:message code="editPreferences.emailSettings.serverName"/>">
+                    <span class="glyphicon glyphicon-info-sign"></span>
+                                </a>
+                                <script type="text/javascript">
+                                    $(function (){
+                                    $("#serverName").popover();
+                                    });
+                                </script>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
-                    <input type="text" name="host" class="form-control" id="plt-email-input-server" title="<spring:message code="editPreferences.emailSettings.serverName.tooltip"/>" value="<c:out value="${form.host}"/>"/>  
+                    <input type="text" name="host" placeholder="imap.gmail.com" class="form-control" id="plt-email-input-server" title="<spring:message code="editPreferences.emailSettings.serverName.tooltip"/>" value="<c:out value="${form.host}"/>"/>  
                 </div>
             </div>
 
@@ -102,6 +130,14 @@
             <div class="row">
                 <div class="col-lg-4 col-md-5 col-sm-8 col-xs-12" >
             		<spring:message code="editPreferences.emailSettings.serverPort"/>
+                    <a href="#" id="serverPort" class="btn btn-info btn-xs" data-placement="left" rel="popover" data-content="<spring:message code="editPreferences.emailSettings.serverPort.toolTip"/>" data-original-title="<spring:message code="editPreferences.emailSettings.serverPort"/>">
+                    <span class="glyphicon glyphicon-info-sign"></span>
+                                </a>
+                                <script type="text/javascript">
+                                    $(function (){
+                                    $("#serverPort").popover();
+                                    });
+                                </script>
             	</div>
         	   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
         		  <input type="text" name="port" class="form-control" id="plt-email-input-port" title="<spring:message code="editPreferences.emailSettings.serverPort.toolTip"/>" value="<c:out value="${form.port}"/>"/>
@@ -163,7 +199,7 @@
             <c:set var="accountNameValue" value="${useAccountNameAttribute ? userInfo[accountNameAttribute] : form.additionalProperties.username.value}" />
 
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
-                <input type="text" name="username" class="form-control" id="plt-email-input-email" title="<spring:message code="editPreferences.emailSettings.portletPreferencesAuthN.emailAddress.tooltip"/>" value="<c:out value="${accountNameValue}"/>"<c:if test="${useAccountNameAttribute}">disabled="disabled"</c:if> />
+                <input type="text" name="username" class="form-control" style="width:75%; display:initial;" id="plt-email-input-email" title="<spring:message code="editPreferences.emailSettings.portletPreferencesAuthN.emailAddress.tooltip"/>" value="<c:out value="${accountNameValue}"/>"<c:if test="${useAccountNameAttribute}">disabled="disabled"</c:if> />
                 <span class="plt-email-address-suffix"><c:out value="${form.usernameSuffix}"/></span>
             </div>
         </div>

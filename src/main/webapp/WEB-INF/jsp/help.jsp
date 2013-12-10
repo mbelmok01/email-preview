@@ -20,16 +20,35 @@
 --%>
 <jsp:directive.include file="/WEB-INF/jsp/include.jsp"/>
 
-<c:set var="n"><portlet:namespace/></c:set>
-<div class="fl-widget portlet" role="section">
+<c:set var="n">
+    <portlet:namespace/>
+</c:set>
 
-	<div class="fl-widget-titlebar portlet-title" role="sectionhead">
-        <h2 role="heading"><c:out value="${helpTitle}"/></h2>
+<div class="fl-widget portlet" role="section">
+    <div class="fl-widget-titlebar portlet-title" role="sectionhead">
+        <h2>
+            <spring:message code="help.preview.title"/>
+        </h2>
     </div>
     
-    <div>${helpInstructions}</div><br/>
+    <div>
+        <spring:message code="help.preview.instructions"/>
+    </div>
+
+    <br>
     
-    <p><spring:message code="help.preview.prelink"/> <a href="<portlet:renderURL portletMode="VIEW"/>"><spring:message code="help.preview.link"/></a></p>
+    <div>
+        <spring:message code="help.preview.instructions-1"/>
+    </div>
+
+    <br>
+    
+    <p>
+        <spring:message code="help.preview.prelink"/>
+        <a href="<portlet:renderURL portletMode="VIEW"/>">
+            <spring:message code="help.preview.link"/>
+        </a>
+    </p>
 </div>
 
 <jsp:directive.include file="/WEB-INF/jsp/footer.jsp"/>
