@@ -31,7 +31,7 @@
 
 <link type="text/css" rel="stylesheet" href="<c:url value="/css/jquery.mobile.structure-1.1.1.min.css"/>" media="screen, projection"/>
 <link type="text/css" rel="stylesheet" href="<c:url value="/css/emailMobile.css"/>" media="screen, projection"/>
-<link type="text/css" rel="stylesheet" href="<c:url value="/css/email.min.css"/>"/>
+<link type="text/css" rel="stylesheet" href="<c:url value="/css/email.css"/>"/>
 
 <c:set var="n"><portlet:namespace/></c:set>
 <portlet:resourceURL id="accountSummary" var="accountSummaryUrl" />

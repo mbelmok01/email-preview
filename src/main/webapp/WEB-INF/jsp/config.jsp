@@ -25,8 +25,8 @@
 <c:if test="${ includeJQuery }">
     <script src="<rs:resourceURL value="/rs/jquery/1.8.3/jquery-1.8.3.min.js"/>" type="text/javascript"></script>
 </c:if>
-<script src="${pageContext.request.contextPath}/js/email-admin-config.min.js" type="text/javascript"></script>
-<link type="text/css" rel="stylesheet" href="<c:url value="/css/email.min.css"/>"/>
+<script src="${pageContext.request.contextPath}/js/email-admin-config.js" type="text/javascript"></script>
+<link type="text/css" rel="stylesheet" href="<c:url value="/css/email.css"/>"/>
 
 <c:set var="n"><portlet:namespace/></c:set>
 <portlet:actionURL var="formUrl">
@@ -137,7 +137,7 @@
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                             <form:input class="form-control" path="exchangeDomain"/>    
                         </div>
-                        
+
                     </div>
 
                     <br>

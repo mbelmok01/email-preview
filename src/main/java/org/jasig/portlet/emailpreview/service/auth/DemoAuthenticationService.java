@@ -71,7 +71,7 @@ public class DemoAuthenticationService implements IAuthenticationService {
 
         @SuppressWarnings("unchecked")
         Map<String, String> userInfo = (Map<String, String>) request.getAttribute(PortletRequest.USER_INFO);
-        String rslt = userInfo.get(USERNAME_ATTRIBUTE);
+        String rslt = "Demo";
         String usernameSuffix = config.getUsernameSuffix();
         if (rslt != null && !StringUtils.isBlank(usernameSuffix)) {
             rslt = rslt.concat(usernameSuffix);
