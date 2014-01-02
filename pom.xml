@@ -571,17 +571,10 @@
             <artifactId>portlet-prototyping-maven-plugin</artifactId>
             <version>0.9</version>
             <configuration>
-                <portletNames>demo-email-preview</portletNames>
+                <portletNames>email-preview</portletNames>
                 <webAppConfig>
                     <overrideDescriptor>src/test/resources/override-web.xml</overrideDescriptor>
                 </webAppConfig>
-                <users>
-                    <user>
-                        <username>demo</username>
-                        <password>demo</password>
-                        <roles>staff</roles>
-                  </user>
-                </users>
             </configuration>
         </plugin>
             <plugin>
